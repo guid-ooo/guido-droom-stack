@@ -1,0 +1,30 @@
+media: assets/uploads
+
+content:
+  - name: pages
+    label: Pages
+    path: content/pages
+    type: collection
+    format: yaml-frontmatter
+    fields:
+      - { name: title, label: Title, type: string }
+      - { name: body, label: Body, type: text }
+
+  - name: posts
+    label: Posts
+    path: content/posts
+    type: collection
+    format: yaml-frontmatter
+    fields:
+      - { name: title, label: Title, type: string }
+      - { name: date,  label: Date,  type: date }
+      - { name: body,  label: Body,  type: text }
+
+  - name: settings
+    label: Site Settings
+    path: content/settings.yml
+    type: file
+    format: yaml
+    fields:
+      - { name: site_title, label: Site title, type: string }
+      - { name: tagline,    label: Tagline,    type: string }
