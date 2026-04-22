@@ -20,10 +20,13 @@ content/settings.yml    # site settings
 ## Run locally
 
 ```sh
-python3 -m http.server 8000
+pnpm install
+pnpm dev      # vite dev server with HMR on http://localhost:8000
+pnpm build    # production build to dist/
+pnpm preview  # serve the built dist/
 ```
 
-Open http://localhost:8000.
+Vite hot-reloads when `index.html`, anything under `src/`, or anything under `content/` changes — so a `git pull` with new CMS content refreshes the page instantly. Tailwind is compiled via the official `@tailwindcss/vite` plugin; jQuery is a real npm dependency.
 
 ## Connect PagesCMS
 
