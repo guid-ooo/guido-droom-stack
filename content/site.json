@@ -5,6 +5,12 @@
   "posts_heading": "Latest posts",
   "blocks": [
     {
+      "_block": "hero",
+      "image": "/assets/uploads/IMG_5979 copy.min.jpg",
+      "heading": "Kiek dan",
+      "description": "Werkt als een tierelier"
+    },
+    {
       "_block": "gallery",
       "images": [
         "/assets/uploads/54ryw5fbjcs1.jpg",
@@ -18,12 +24,6 @@
       "text": "<p>Moet je overal een text image voor gebruiken? Als je het mij vraagt wel.</p>",
       "image": "/assets/uploads/54ryw5fbjcs1.jpg",
       "layout": "right"
-    },
-    {
-      "_block": "hero",
-      "image": "/assets/uploads/IMG_5979 copy.min.jpg",
-      "heading": "Kiek dan",
-      "description": "Werkt als een tierelier"
     }
   ]
 }
