@@ -1,30 +1,84 @@
 media: assets/uploads
 
 content:
-  - name: pages
-    label: Pages
-    path: content/pages
-    type: collection
-    format: yaml-frontmatter
+  - name: site
+    label: Landing page
+    path: content/site.json
+    type: file
+    format: json
     fields:
-      - { name: title, label: Title, type: string }
-      - { name: body, label: Body, type: text }
+      - { name: brand, label: Brand, type: string }
+      - name: hero
+        label: Hero
+        type: object
+        fields:
+          - { name: eyebrow, type: string }
+          - { name: title_html, label: Title (HTML), type: text }
+          - { name: body, type: text }
+          - { name: image, type: image }
+          - { name: badge_title, type: string }
+          - { name: badge_body, type: string }
+          - name: primary_cta
+            type: object
+            fields:
+              - { name: label, type: string }
+              - { name: href, type: string }
+          - name: secondary_cta
+            type: object
+            fields:
+              - { name: label, type: string }
+              - { name: href, type: string }
+      - { name: features_heading, type: string }
+      - { name: features_body, type: text }
+      - name: features
+        label: Features
+        type: object
+        list: true
+        fields:
+          - { name: icon, type: string }
+          - { name: accent, type: string, options: { values: [sky, cyan, emerald, amber, rose] } }
+          - { name: title, type: string }
+          - { name: body, type: text }
+      - name: story
+        label: Story sections
+        type: object
+        list: true
+        fields:
+          - { name: number, type: string }
+          - { name: eyebrow, type: string }
+          - { name: title, type: string }
+          - { name: body, type: text }
+          - { name: image, type: image }
+          - { name: bullets, type: string, list: true }
+      - { name: journal_heading, type: string }
+      - { name: journal_body, type: text }
+      - { name: posts_order, label: Posts shown on landing, type: string, list: true }
+      - name: cta
+        label: Closing CTA
+        type: object
+        fields:
+          - { name: title, type: string }
+          - { name: body, type: text }
+          - name: primary
+            type: object
+            fields:
+              - { name: label, type: string }
+              - { name: href, type: string }
+          - name: secondary
+            type: object
+            fields:
+              - { name: label, type: string }
+              - { name: href, type: string }
+      - { name: footer, type: string }
 
   - name: posts
-    label: Posts
+    label: Journal posts
     path: content/posts
     type: collection
     format: yaml-frontmatter
     fields:
       - { name: title, label: Title, type: string }
-      - { name: date,  label: Date,  type: date }
-      - { name: body,  label: Body,  type: text }
-
-  - name: settings
-    label: Site Settings
-    path: content/settings.yml
-    type: file
-    format: yaml
-    fields:
-      - { name: site_title, label: Site title, type: string }
-      - { name: tagline,    label: Tagline,    type: string }
+      - { name: date, label: Date, type: date }
+      - { name: excerpt, label: Excerpt, type: text }
+      - { name: image, label: Cover image, type: image }
+      - { name: body, label: Body, type: text }
