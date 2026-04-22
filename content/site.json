@@ -6,9 +6,18 @@
   "blocks": [
     {
       "_block": "text_image",
-      "text": "<p>Moet je overal een text image voor gebruiken?</p>",
+      "text": "<p>Moet je overal een text image voor gebruiken? Als je het mij vraagt wel. </p>",
       "image": "/assets/uploads/54ryw5fbjcs1.jpg",
       "layout": "right"
+    },
+    {
+      "_block": "gallery",
+      "images": [
+        "/assets/uploads/54ryw5fbjcs1.jpg",
+        "/assets/uploads/54ryw5fbjcs1.jpg",
+        "/assets/uploads/54ryw5fbjcs1.jpg",
+        "/assets/uploads/54ryw5fbjcs1.jpg"
+      ]
     }
   ]
 }
