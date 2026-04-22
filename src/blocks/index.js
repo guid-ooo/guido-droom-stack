@@ -1,7 +1,8 @@
 import * as gallery from "./gallery.js";
 import * as textImage from "./text-image.js";
+import * as hero from "./hero.js";
 
-const registry = Object.fromEntries([gallery, textImage].map((m) => [m.type, m]));
+const registry = Object.fromEntries([gallery, textImage, hero].map((m) => [m.type, m]));
 
 export function renderBlocks(blocks) {
   if (!blocks || !blocks.length) return "";

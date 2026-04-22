@@ -9,21 +9,21 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
   </head>
   <body class="bg-stone-50 text-slate-900 antialiased">
-    <div class="mx-auto max-w-5xl px-6 pt-20">
-      <header class="text-center mb-16">
+    <header class="sticky top-0 z-40 backdrop-blur bg-stone-50/80 border-b border-stone-200/60">
+      <div class="mx-auto max-w-5xl px-6 py-4 text-center flex justify-between items-center">
         <a href="/" class="inline-block">
           <div class="flex gap-4 items-center justify-center">
-            <img id="hero" alt="" class="rounded-2xl shadow-md aspect-[16/12] object-cover h-14 w-auto" />
-            <h1 id="title" class="text-5xl font-semibold tracking-tight"></h1>
+            <img id="hero" alt="" class="rounded-xl shadow-sm aspect-[16/12] object-cover h-10 w-auto" />
+            <h1 id="title" class="text-2xl font-semibold tracking-tight"></h1>
           </div>
         </a>
-        <p id="subtitle" class="mt-4 text-lg text-slate-600 max-w-xl mx-auto"></p>
-      </header>
-    </div>
+        <span id="subtitle" class="text-sm text-slate-600 max-w-xl h-fit"></span>
+      </div>
+    </header>
 
     <main data-barba="wrapper">
       <div data-barba="container" data-barba-namespace="post">
-        <article class="mx-auto max-w-2xl px-6 pb-20">
+        <article class="mx-auto max-w-2xl px-6 py-20">
           <a href="/" class="text-sm text-slate-500 hover:text-slate-900">← Back</a>
           <h1 id="post-title" class="mt-8 text-4xl font-semibold tracking-tight"></h1>
           <img id="post-image" alt="" class="mt-8 rounded-2xl shadow-md aspect-[3/2] object-cover w-full" />

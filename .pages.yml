@@ -17,6 +17,12 @@ content:
         list: true
         blockKey: _block
         blocks:
+          - name: hero
+            label: Hero (image + heading)
+            fields:
+              - { name: image, label: Image, type: image }
+              - { name: heading, label: Heading, type: string }
+              - { name: description, label: Description, type: text }
           - name: gallery
             label: Gallery (images only)
             fields:
@@ -58,6 +64,12 @@ content:
         list: true
         blockKey: _block
         blocks:
+          - name: hero
+            label: Hero (image + heading)
+            fields:
+              - { name: image, label: Image, type: image }
+              - { name: heading, label: Heading, type: string }
+              - { name: description, label: Description, type: text }
           - name: gallery
             label: Gallery (images only)
             fields:
