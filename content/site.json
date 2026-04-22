@@ -1,56 +1,6 @@
 {
-  "brand": "Dream Stack",
-  "hero": {
-    "eyebrow": "Dream stack · 2026",
-    "title_html": "A calmer way<br/> to build <em class=\"italic text-emerald-700\">beautiful</em> websites.",
-    "body": "jQuery for interactivity. Tailwind for craft. PagesCMS for content. Three old friends doing one honest job.",
-    "image": "https://picsum.photos/seed/dreamhero/900/1000",
-    "badge_title": "Ships in a weekend",
-    "badge_body": "No build step required",
-    "primary_cta": { "label": "Start building", "href": "#cta" },
-    "secondary_cta": { "label": "See the story", "href": "#story" }
-  },
-  "features_heading": "Small tools, well chosen.",
-  "features_body": "Every piece earns its place. Nothing here to impress a recruiter.",
-  "features": [
-    { "icon": "$", "accent": "sky",     "title": "jQuery",    "body": "Still the shortest path from idea to working interaction. No bundler. No ceremony." },
-    { "icon": "~", "accent": "cyan",    "title": "Tailwind",  "body": "Design tokens as utilities. Everything consistent, nothing precious." },
-    { "icon": "◆", "accent": "emerald", "title": "PagesCMS",  "body": "A friendly editor on top of your Git repo. Content lives with the code." }
-  ],
-  "story": [
-    {
-      "number": "01",
-      "eyebrow": "Write",
-      "title": "Content that lives in your repo.",
-      "body": "Every page is a Markdown file. PagesCMS wraps them in a friendly editor, commits changes back to GitHub, and redeploys automatically. No database to back up. No admin password to lose.",
-      "image": "https://picsum.photos/seed/dreamwrite/900/700",
-      "bullets": ["Markdown + YAML frontmatter", "Git history as your audit log", "Preview on every branch"]
-    },
-    {
-      "number": "02",
-      "eyebrow": "Design",
-      "title": "Tailwind, without the essay.",
-      "body": "A small set of utilities gets you most of the way. Spacing stays consistent. Colors stay on brand. You never have to name a class called card__inner--alt again.",
-      "image": "https://picsum.photos/seed/dreamdesign/900/700",
-      "bullets": []
-    },
-    {
-      "number": "03",
-      "eyebrow": "Ship",
-      "title": "No build step. No excuses.",
-      "body": "Two CDN links and a static host. Push to main and you're live. Perfect for portfolios, product pages, and anything that doesn't need a Kubernetes cluster.",
-      "image": "https://picsum.photos/seed/dreamship/900/700",
-      "bullets": []
-    }
-  ],
-  "journal_heading": "From the journal",
-  "journal_body": "Drafted in Markdown. Published by a commit.",
-  "posts_order": ["hello-world", "why-jquery", "content-in-git"],
-  "cta": {
-    "title": "Build the small web, on purpose.",
-    "body": "Clone the scaffold, connect your repo to PagesCMS, and you'll have a site you're proud of before dinner.",
-    "primary": { "label": "Get the scaffold →", "href": "https://github.com/pagescms/pagescms" },
-    "secondary": { "label": "Try PagesCMS", "href": "https://pagescms.org" }
-  },
-  "footer": "© 2026 Dream Stack · Made with jQuery, Tailwind & PagesCMS."
+  "title": "Dream Stack",
+  "subtitle": "A little landing page built with jQuery, Tailwind and PagesCMS.",
+  "image": "https://picsum.photos/seed/dreamhero/1200/800",
+  "posts_heading": "Latest posts"
 }

@@ -8,59 +8,22 @@
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Fraunces:opsz,wght@9..144,500;9..144,700&display=swap" rel="stylesheet" />
-    <style>
-      :root { --ease: cubic-bezier(.22,.61,.36,1); }
-      body { font-family: 'Inter', ui-sans-serif, system-ui, sans-serif; }
-      .font-display { font-family: 'Fraunces', ui-serif, Georgia, serif; letter-spacing: -0.02em; }
-      .reveal { opacity: 0; transform: translateY(16px); transition: opacity .7s var(--ease), transform .7s var(--ease); }
-      .reveal.in { opacity: 1; transform: none; }
-      .hover-lift { transition: transform .3s var(--ease), box-shadow .3s var(--ease); }
-      .hover-lift:hover { transform: translateY(-2px); box-shadow: 0 10px 30px -12px rgba(15,23,42,.18); }
-    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+    <style>body { font-family: 'Inter', system-ui, sans-serif; }</style>
   </head>
   <body class="bg-stone-50 text-slate-900 antialiased">
-    <nav class="sticky top-0 z-40 backdrop-blur bg-stone-50/80 border-b border-stone-200/60">
-      <div class="mx-auto max-w-6xl px-6 h-16 flex items-center justify-between">
-        <a href="#" class="flex items-center gap-2 font-semibold">
-          <span class="inline-block w-2.5 h-2.5 rounded-full bg-emerald-500"></span>
-          <span data-brand>Dream Stack</span>
-        </a>
-        <div class="hidden md:flex items-center gap-8 text-sm text-slate-600">
-          <a href="#features" class="hover:text-slate-900">Features</a>
-          <a href="#story" class="hover:text-slate-900">Story</a>
-          <a href="#journal" class="hover:text-slate-900">Journal</a>
-          <a href="#cta" class="inline-flex items-center gap-1.5 rounded-full bg-slate-900 text-white px-4 py-1.5 hover:bg-slate-800 transition">Get started →</a>
-        </div>
-      </div>
-    </nav>
+    <main class="mx-auto max-w-5xl px-6 py-20">
+      <header class="text-center mb-16">
+        <h1 id="title" class="text-5xl font-semibold tracking-tight"></h1>
+        <p id="subtitle" class="mt-4 text-lg text-slate-600 max-w-xl mx-auto"></p>
+        <img id="hero" alt="" class="mt-10 rounded-2xl shadow-md aspect-[3/2] object-cover w-full" />
+      </header>
 
-    <header id="hero" class="relative overflow-hidden"></header>
-    <section id="features" class="py-24 bg-white border-y border-stone-200/70"></section>
-    <section id="story" class="py-24"></section>
-
-    <section id="journal" class="py-24 bg-white border-y border-stone-200/70">
-      <div class="mx-auto max-w-6xl px-6">
-        <div class="mb-10 reveal">
-          <h2 id="journal-heading" class="font-display text-4xl"></h2>
-          <p id="journal-body" class="mt-3 text-slate-600"></p>
-        </div>
-        <ul id="posts-list" class="grid md:grid-cols-3 gap-6"></ul>
-      </div>
-    </section>
-
-    <section id="cta" class="py-24"></section>
-
-    <footer class="py-10 text-sm text-slate-500">
-      <div class="mx-auto max-w-6xl px-6 flex flex-wrap items-center justify-between gap-3">
-        <div data-footer></div>
-        <div class="flex gap-5">
-          <a href="#" class="hover:text-slate-900">Twitter</a>
-          <a href="#" class="hover:text-slate-900">GitHub</a>
-          <a href="#" class="hover:text-slate-900">RSS</a>
-        </div>
-      </div>
-    </footer>
+      <section>
+        <h2 id="posts-heading" class="text-2xl font-semibold mb-8"></h2>
+        <ul id="posts" class="grid md:grid-cols-3 gap-6"></ul>
+      </section>
+    </main>
 
     <script src="assets/js/app.js"></script>
   </body>
