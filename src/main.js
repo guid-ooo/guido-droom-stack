@@ -1,5 +1,7 @@
 import barba from "@barba/core";
 import $ from "jquery";
+import yaml from "js-yaml";
+import { marked } from "marked";
 import "./style.css";
 
 function esc(s) {
@@ -10,21 +12,51 @@ function esc(s) {
 
 function parseFrontmatter(md) {
   const m = md.match(/^---\s*\n([\s\S]*?)\n---\s*\n?([\s\S]*)$/);
-  const meta = {};
-  let body = md;
-  if (m) {
-    m[1].split(/\n/).forEach((line) => {
-      const kv = line.match(/^([a-zA-Z_][\w-]*)\s*:\s*(.*)$/);
-      if (kv) meta[kv[1]] = kv[2].trim();
-    });
-    body = m[2];
-  }
-  return { meta, body };
+  if (!m) return { meta: {}, body: md };
+  let meta = {};
+  try { meta = yaml.load(m[1]) || {}; } catch { meta = {}; }
+  return { meta, body: m[2] };
 }
 
-const POST_SLUGS = ["hello-world", "why-jquery", "content-in-git"];
+// Blocks ---------------------------------------------------------------------
 
-// Persistent header — lives outside barba wrapper, loaded once.
+function renderBlock(b) {
+  if (b._block === "gallery") {
+    const imgs = (b.images || [])
+      .map((src) => '<img src="' + esc(src) + '" alt="" class="rounded-xl aspect-square object-cover w-full" />')
+      .join("");
+    return '<div class="grid grid-cols-2 md:grid-cols-3 gap-4">' + imgs + "</div>";
+  }
+  if (b._block === "text_image") {
+    const imageLeft = b.layout === "left";
+    const textCol =
+      '<div class="prose prose-slate max-w-none">' + (b.text || "") + "</div>";
+    const imgCol = b.image
+      ? '<img src="' + esc(b.image) + '" alt="" class="rounded-2xl shadow-md aspect-[4/3] object-cover w-full" />'
+      : "";
+    return (
+      '<div class="grid md:grid-cols-2 gap-8 items-center">' +
+        (imageLeft ? imgCol + textCol : textCol + imgCol) +
+      "</div>"
+    );
+  }
+  return "";
+}
+
+function renderBlocks(blocks) {
+  if (!blocks || !blocks.length) return "";
+  return blocks.map((b) => '<section class="mb-16">' + renderBlock(b) + "</section>").join("");
+}
+
+// Post discovery -------------------------------------------------------------
+
+const POSTS = Object.keys(import.meta.glob("/content/posts/*.md")).map((path) => ({
+  slug: path.split("/").pop().replace(/\.md$/, ""),
+  url: path,
+}));
+
+// Persistent header ----------------------------------------------------------
+
 $.getJSON("/content/site.json", function (site) {
   document.title = site.title;
   $("#title").text(site.title);
@@ -32,21 +64,23 @@ $.getJSON("/content/site.json", function (site) {
   $("#hero").attr("src", site.image);
 });
 
+// Renderers ------------------------------------------------------------------
+
 function renderHome(root) {
   const $root = $(root);
+
   $.getJSON("/content/site.json", function (site) {
     $root.find("#posts-heading").text(site.posts_heading);
+    $root.find("#blocks").html(renderBlocks(site.blocks));
   });
 
-  $.when.apply(
-    $,
-    POST_SLUGS.map((s) =>
-      $.get("/content/posts/" + s + ".md").then((md) =>
-        Object.assign({ slug: s }, parseFrontmatter(md).meta)
+  Promise.all(
+    POSTS.map((p) =>
+      Promise.resolve($.get(p.url)).then((md) =>
+        Object.assign({ slug: p.slug }, parseFrontmatter(md).meta)
       )
     )
-  ).done(function () {
-    const posts = POST_SLUGS.length === 1 ? [arguments[0]] : Array.prototype.slice.call(arguments);
+  ).then((posts) => {
     const $list = $root.find("#posts").empty();
     posts
       .sort((a, b) => (+a.order || 0) - (+b.order || 0))
@@ -76,11 +110,8 @@ function renderPost(root) {
       const { meta, body } = parseFrontmatter(md);
       $root.find("#post-title").text(meta.title);
       $root.find("#post-image").attr("src", meta.image);
-      $root.find("#post-body").html(
-        body.trim().split(/\n{2,}/)
-          .map((p) => "<p>" + esc(p.trim()) + "</p>")
-          .join("")
-      );
+      $root.find("#post-body").html(marked.parse(body.trim()));
+      $root.find("#post-blocks").html(renderBlocks(meta.blocks));
     })
     .fail(function () {
       $root.find("#post-title").text("Post not found");
@@ -91,6 +122,8 @@ function run(namespace, container) {
   if (namespace === "home") renderHome(container);
   else if (namespace === "post") renderPost(container);
 }
+
+// Barba ----------------------------------------------------------------------
 
 function fade(el, from, to) {
   return el.animate(

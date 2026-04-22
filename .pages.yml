@@ -11,6 +11,32 @@ content:
       - { name: subtitle, label: Subtitle, type: text }
       - { name: image, label: Hero image, type: image }
       - { name: posts_heading, label: Posts heading, type: string }
+      - name: blocks
+        label: Content blocks
+        type: block
+        list: true
+        blockKey: _block
+        blocks:
+          - name: gallery
+            label: Gallery (images only)
+            fields:
+              - { name: images, label: Images, type: image, list: true }
+          - name: text_image
+            label: Text + image
+            fields:
+              - name: text
+                label: Text
+                type: rich-text
+                options: { format: html }
+              - { name: image, label: Image, type: image }
+              - name: layout
+                label: Image position
+                type: select
+                default: right
+                options:
+                  values:
+                    - { value: right, label: Image right }
+                    - { value: left,  label: Image left }
 
   - name: posts
     label: Posts
@@ -22,3 +48,33 @@ content:
       - { name: image, label: Image, type: image }
       - { name: text, label: Text, type: text }
       - { name: order, label: Order, type: number }
+      - name: body
+        label: Body
+        type: rich-text
+        options: { format: markdown }
+      - name: blocks
+        label: Content blocks
+        type: block
+        list: true
+        blockKey: _block
+        blocks:
+          - name: gallery
+            label: Gallery (images only)
+            fields:
+              - { name: images, label: Images, type: image, list: true }
+          - name: text_image
+            label: Text + image
+            fields:
+              - name: text
+                label: Text
+                type: rich-text
+                options: { format: html }
+              - { name: image, label: Image, type: image }
+              - name: layout
+                label: Image position
+                type: select
+                default: right
+                options:
+                  values:
+                    - { value: right, label: Image right }
+                    - { value: left,  label: Image left }
