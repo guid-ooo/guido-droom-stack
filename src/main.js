@@ -2,13 +2,9 @@ import barba from "@barba/core";
 import $ from "jquery";
 import yaml from "js-yaml";
 import { marked } from "marked";
+import { esc } from "./util.js";
+import { renderBlocks, mountBlocks } from "./blocks/index.js";
 import "./style.css";
-
-function esc(s) {
-  return String(s == null ? "" : s)
-    .replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;")
-    .replace(/"/g, "&quot;").replace(/'/g, "&#39;");
-}
 
 function parseFrontmatter(md) {
   const m = md.match(/^---\s*\n([\s\S]*?)\n---\s*\n?([\s\S]*)$/);
@@ -16,36 +12,6 @@ function parseFrontmatter(md) {
   let meta = {};
   try { meta = yaml.load(m[1]) || {}; } catch { meta = {}; }
   return { meta, body: m[2] };
-}
-
-// Blocks ---------------------------------------------------------------------
-
-function renderBlock(b) {
-  if (b._block === "gallery") {
-    const imgs = (b.images || [])
-      .map((src) => '<img src="' + esc(src) + '" alt="" class="rounded-xl aspect-square object-cover w-full" />')
-      .join("");
-    return '<div class="grid grid-cols-2 md:grid-cols-3 gap-4">' + imgs + "</div>";
-  }
-  if (b._block === "text_image") {
-    const imageLeft = b.layout === "left";
-    const textCol =
-      '<div class="prose prose-slate max-w-none">' + (b.text || "") + "</div>";
-    const imgCol = b.image
-      ? '<img src="' + esc(b.image) + '" alt="" class="rounded-2xl shadow-md aspect-[4/3] object-cover w-full" />'
-      : "";
-    return (
-      '<div class="grid md:grid-cols-2 gap-8 items-center">' +
-        (imageLeft ? imgCol + textCol : textCol + imgCol) +
-      "</div>"
-    );
-  }
-  return "";
-}
-
-function renderBlocks(blocks) {
-  if (!blocks || !blocks.length) return "";
-  return blocks.map((b) => '<section class="mb-16">' + renderBlock(b) + "</section>").join("");
 }
 
 // Post discovery -------------------------------------------------------------
@@ -71,7 +37,9 @@ function renderHome(root) {
 
   $.getJSON("/content/site.json", function (site) {
     $root.find("#posts-heading").text(site.posts_heading);
-    $root.find("#blocks").html(renderBlocks(site.blocks));
+    const blocksEl = $root.find("#blocks")[0];
+    blocksEl.innerHTML = renderBlocks(site.blocks);
+    mountBlocks(blocksEl);
   });
 
   Promise.all(
@@ -111,7 +79,9 @@ function renderPost(root) {
       $root.find("#post-title").text(meta.title);
       $root.find("#post-image").attr("src", meta.image);
       $root.find("#post-body").html(marked.parse(body.trim()));
-      $root.find("#post-blocks").html(renderBlocks(meta.blocks));
+      const blocksEl = $root.find("#post-blocks")[0];
+      blocksEl.innerHTML = renderBlocks(meta.blocks);
+      mountBlocks(blocksEl);
     })
     .fail(function () {
       $root.find("#post-title").text("Post not found");
